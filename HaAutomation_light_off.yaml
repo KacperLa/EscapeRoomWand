@@ -1,0 +1,15 @@
+alias: wand off
+description: ""
+triggers:
+  - trigger: state
+    entity_id:
+      - sensor.wand_light
+    from: "0"
+    to: "1"
+conditions: []
+actions:
+  - type: turn_off
+    device_id: e1e6308d9faf380c83a6898fbf836a8e
+    entity_id: cb54a644bf2619e64394c5f54ac32325
+    domain: switch
+mode: single

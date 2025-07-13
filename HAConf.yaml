@@ -1,0 +1,11 @@
+mqtt:
+  sensor:
+    - name: Wand Light
+      state_topic: "wand/state/light"
+      value_template: "{{ value_json.state }}"
+    - name: Wand Spell
+      state_topic: "wand/state/checkpoint"
+      value_template: "{{ value_json.state }}"
+    - name: Wand History
+      state_topic: "wand/state/history"
+      value_template: "{{ value_json.history | tojson }}"

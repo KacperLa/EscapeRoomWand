@@ -1,0 +1,31 @@
+alias: Wand first-three array values
+description: ""
+triggers:
+  - entity_id: sensor.wand_history
+    trigger: state
+conditions:
+  - condition: template
+    value_template: |
+      {%- set arr = states('sensor.wand_history')
+                   | default('[]')
+                   | from_json -%}
+      {{  (arr | length) >= 3
+          and (arr[0] | int) == 3
+          and (arr[1] | int) == 4
+          and (arr[2] | int) == 6
+          and (arr[3] | int) == 5}}
+actions:
+  - data:
+      name: Wand monitor
+      message: >
+        {%- set arr = states('sensor.wand_history')
+                     | default('[]')
+                     | from_json -%}
+        Length = {{ arr | length }}, first = {{ arr[0] | int(default='NA') }},
+        second = {{ arr[1] | int(default='NA') }}
+    action: logbook.log
+  - type: turn_on
+    device_id: 8eec696046bc8d1477ff5ad793b8bc2b
+    entity_id: c1039bbd0f68f51d14f8ea4353d44eeb
+    domain: switch
+mode: single
